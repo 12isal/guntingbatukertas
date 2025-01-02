@@ -166,11 +166,12 @@
     document.getElementById('computerAnimation').textContent = computerChoice;
 
     let result = '';
+    let pesan = '';
 
     if (playerChoice === computerChoice) {
         result = `Seri! Kamu memilih ${playerChoice}, Komputer memilih ${computerChoice}.`;
     } else if (playerName === 'Sean Clasica Rahma') {
-        result = `Cuman kamu yang bisa menang 🤫`; // Pesan khusus untuk "Komputer"
+        pesan = `Cuman kamu yang bisa menang 🤫`; // Pesan khusus untuk "Komputer"
         result = `Kamu memang! ${playerChoice} mengalahkan ${computerChoice}.`;
         playerScore++;
     } else {
