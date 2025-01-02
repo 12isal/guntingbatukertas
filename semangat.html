@@ -1,0 +1,230 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="file.css">
+    <title>Semangat</title>
+</head>
+<body>
+    <div class="background" >
+        <div class="isi">
+    <h1>Halo .... Gimana kabar nya?</h1>
+    <p>jangan click yang lagi sedih yaa... gak akan bisa di click ehe</p>
+    <img src="deku.gif" alt="Halo" >
+   
+
+    <button  onclick="mau()" >Baik banget :)</button> 
+    <button onmouseover="gak(this)">Lagi sedih nih :( </button>
+    
+
+        </div>
+    </div>
+    <script>
+        function mau() {
+          alert("Bagus atuh jangan lupa senyum :)");
+          alert("Kalau mau cerita sok boleh chat DI wa/dm)");
+          
+      
+  
+    
+        }
+        function gak(ini) {
+          ini.style.position = "absolute";
+          ini.style.left = `${Math.floor(Math.random() * 90)}%`;
+          ini.style.top = `${Math.floor(Math.random() * 90)}%`;
+
+          
+        }
+        
+      </script>
+</body>
+</html>
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Gunting Batu Kertas</title>
+     <style>
+         body {
+             font-family: Arial, sans-serif;
+             text-align: center;
+             background-color: #f0f0f0;
+             margin: 0;
+             padding: 0;
+         }
+ 
+         .container {
+             margin-top: 50px;
+         }
+ 
+         .choice-buttons button {
+             font-size: 20px;
+             margin: 10px;
+             padding: 10px 20px;
+             cursor: pointer;
+             border: none;
+             border-radius: 5px;
+             background-color: #007bff;
+             color: white;
+             transition: background-color 0.3s;
+         }
+ 
+         .choice-buttons button:hover {
+             background-color: #0056b3;
+         }
+ 
+         .result {
+             margin-top: 30px;
+             font-size: 24px;
+             font-weight: bold;
+         }
+ 
+         .score {
+             margin-top: 20px;
+             font-size: 20px;
+         }
+ 
+         .name-input {
+             margin-top: 20px;
+         }
+ 
+         .name-input input {
+             font-size: 16px;
+             padding: 5px;
+             margin-right: 10px;
+         }
+ 
+         .name-input button {
+             font-size: 16px;
+             padding: 5px 10px;
+             cursor: pointer;
+             border: none;
+             border-radius: 5px;
+             background-color: #28a745;
+             color: white;
+             transition: background-color 0.3s;
+         }
+ 
+         .name-input button:hover {
+             background-color: #218838;
+         }
+ 
+         .computer-animation {
+             margin: 20px auto;
+             width: 100px;
+             height: 100px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             border: 2px solid #ccc;
+             border-radius: 50%;
+             background-color: #fff;
+             font-size: 18px;
+             font-weight: bold;
+             animation: shake 1s infinite;
+         }
+ 
+         @keyframes shake {
+             0%, 100% { transform: rotate(-10deg); }
+             50% { transform: rotate(10deg); }
+         }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <h1>Gunting, Batu, Kertas</h1>
+         <div class="name-input">
+             <input type="text" id="playerName" placeholder="Masukkan nama Anda">
+             <button onclick="startGame()">Mulai</button>
+         </div>
+         <div id="gameArea" style="display: none;">
+             <div class="computer-animation" id="computerAnimation">...</div>
+             <div class="choice-buttons">
+                 <button onclick="playGame('Gunting')">Gunting</button>
+                 <button onclick="playGame('Batu')">Batu</button>
+                 <button onclick="playGame('Kertas')">Kertas</button>
+             </div>
+             <div class="result" id="result"></div>
+             <div class="score" id="score">Skor: Pemain 0 - 0 Komputer</div>
+         </div>
+     </div>
+ 
+     <script>
+         let playerScore = 0;
+         let computerScore = 0;
+         let playerName = '';
+         let computerInterval;
+     
+         function startGame() {
+             playerName = document.getElementById('playerName').value.trim();
+             if (playerName === '') {
+                 alert('Silakan masukkan nama Anda!');
+                 return;
+             }
+             document.querySelector('.name-input').style.display = 'none';
+             document.getElementById('gameArea').style.display = 'block';
+             startComputerAnimation();
+         }
+     
+         function getComputerChoice() {
+             const choices = ['Gunting', 'Batu', 'Kertas'];
+             return choices[Math.floor(Math.random() * choices.length)];
+         }
+     
+         function startComputerAnimation() {
+             const computerAnimation = document.getElementById('computerAnimation');
+             const choices = ['Gunting', 'Batu', 'Kertas'];
+             let index = 0;
+     
+             computerInterval = setInterval(() => {
+                 computerAnimation.textContent = choices[index];
+                 index = (index + 1) % choices.length;
+             }, 200);
+         }
+     
+         function stopComputerAnimation() {
+             clearInterval(computerInterval);
+             document.getElementById('computerAnimation').textContent = '';
+         }
+     
+         function playGame(playerChoice) {
+             stopComputerAnimation();
+             let computerChoice = getComputerChoice();
+     
+             if (playerName === 'Komputer') {
+                 // Logika memastikan komputer menang
+                 if (playerChoice === 'Batu') computerChoice = 'Gunting';
+                 if (playerChoice === 'Kertas') computerChoice = 'Batu';
+                 if (playerChoice === 'Gunting') computerChoice = 'Kertas';
+             } else {
+                 // Logika memastikan pemain selalu kalah
+                 if (playerChoice === 'Batu') computerChoice = 'Kertas';
+                 if (playerChoice === 'Kertas') computerChoice = 'Gunting';
+                 if (playerChoice === 'Gunting') computerChoice = 'Batu';
+             }
+     
+             document.getElementById('computerAnimation').textContent = computerChoice;
+     
+             let result = '';
+     
+             if (playerName === 'Komputer') {
+                 result = `Cuman kamu yang bisa menang 🤫`; // Pesan khusus untuk "Komputer"
+                 playerScore++;
+             } else {
+                 result = `Kamu kalah! ${computerChoice} mengalahkan ${playerChoice}.`;
+                 computerScore++;
+             }
+     
+             document.getElementById('result').textContent = result;
+             document.getElementById('score').textContent = `Skor: Pemain ${playerScore} - ${computerScore} Komputer`;
+             setTimeout(startComputerAnimation, 1000);
+         }
+     </script>
+     
+ </body>
+ </html>
+ 

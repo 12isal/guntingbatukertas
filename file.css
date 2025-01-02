@@ -1,0 +1,28 @@
+
+.background{
+    background-color:rgb(104, 190, 141) ;
+    padding: 10px;
+    margin: auto;
+    width: 450px;
+    height: 590px;
+    float: center;
+}
+
+.isi{
+    margin: auto;
+    width: 350px;
+    font-family: cursive;
+}
+
+.isi button{
+   
+    background-color: rgb(139, 180, 241);
+    border: 0;
+    border-radius: 8px;
+    height: 30px;
+    padding: 4px;
+    font-style: normal;
+}
+.isi button:hover{
+    background-color: aquamarine;
+}
