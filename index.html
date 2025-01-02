@@ -178,9 +178,7 @@
         result = `Kamu kalah! ${playerChoice} kalah dari ${computerChoice}.`;
         computerScore++;
     }
-
-    document.getElementById('result').textContent = result;
-    document.getElementById('result').textContent = pesan;
+    document.getElementById('result').textContent = `${pesan} ${result}`;
     document.getElementById('score').textContent = `Skor: Pemain ${playerScore} - ${computerScore} Komputer`;
 
     setTimeout(startComputerAnimation, 2000);
