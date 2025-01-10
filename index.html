@@ -107,6 +107,53 @@
             <div class="result" id="result"></div>
             <div class="score" id="score">Skor: Pemain 0 - 0 Komputer</div>
         </div>
+        <!-- Div untuk menampilkan kartu ucapan -->
+        <div id="congratsCard" style="display: none; margin-top: 20px; border: 2px solid #4caf50; border-radius: 10px; padding: 20px; background-color: #d4edda; color: #155724;">
+            <h2>ntahlah judul nya</h2>
+            <p>
+                Ntah ini apa,<br>
+                Tapi anggap saja puisi,<br>
+                aku memaksa.<br>
+                <br>
+                Dengan posisi kepala ku tidak berisi<br>
+                Aku menemukan mun dibenak ku,<b>sunyi.</b><br>
+            </p>
+            <p>
+                Ntah lah aku tak tau kapan,<br>
+                Dengan kondisi apa kau membaca nya<br>
+                Jika kau sudah membaca sebagian kalimat ini.<br>
+                Artinya Kau ingat dengan permainan akan di revisi.<br>
+            </p>
+            <p>
+                Maaf menyita waktu mu untuk membaca nya,<br>
+                Aku tau kau sibuk tapi bacalah mungkin tidur mu akan nyenyak,<b>khayalan ku.</b><br>
+                Ntah kau sedang makan es krim,<br>
+                Atau kau sedang mengerjekan tugas tugas yang kau cicil tiap harinya<br>
+                Atau kau sedang menerima pesan semanis es krim,<br>
+                Atau...,atau...,atau...Ntalah aku tidak bisa menebaknya,kapan kau membaca puisi ini ntalah. <br>
+            </p>
+            <h2>bagian pantun</h2>
+            <p>
+                Langit malam sunyi sekali<br>
+                Hujan gerimis mengundang pelangi<br>
+                Hari ini hari jadi mu<br>
+                Tak terasa sudah dewasa sekali<br>
+            </p>
+            <p>
+                Menghitung angka dengan berurut<br>
+                yang ngitung nya si duloh<br>
+                Wahai nona jangan cemburut<br>
+                Nanti cepat keriput loh<br>
+            </p>
+            <p>
+                Pergi ke pasar dengan membungkuk<br>
+                Pulangnya membeli oli<br>
+                jangan wajah nya di tekuk<br>
+                senyum sekali ,cantik sekali<br>
+            </p>
+
+
+        </div>
     </div>
 
     <script>
@@ -114,9 +161,9 @@
         let computerScore = 0;
         let playerName = '';
         let computerInterval;
-    
+
         function startGame() {
-            playerName = document.getElementById('playerName').value.trim();
+            playerName = document.getElementById('playerName').value.trim().toLowerCase();
             if (playerName === '') {
                 alert('Silakan masukkan nama Anda!');
                 return;
@@ -125,66 +172,68 @@
             document.getElementById('gameArea').style.display = 'block';
             startComputerAnimation();
         }
-    
+
         function getComputerChoice() {
             const choices = ['Gunting', 'Batu', 'Kertas'];
             return choices[Math.floor(Math.random() * choices.length)];
         }
-    
+
         function startComputerAnimation() {
             const computerAnimation = document.getElementById('computerAnimation');
             const choices = ['Gunting', 'Batu', 'Kertas'];
             let index = 0;
-    
+
             computerInterval = setInterval(() => {
                 computerAnimation.textContent = choices[index];
                 index = (index + 1) % choices.length;
             }, 200);
         }
-    
+
         function stopComputerAnimation() {
             clearInterval(computerInterval);
             document.getElementById('computerAnimation').textContent = '';
         }
-    
+
         function playGame(playerChoice) {
-    stopComputerAnimation();
-    let computerChoice = getComputerChoice();
+            stopComputerAnimation();
+            let computerChoice = getComputerChoice();
 
-    if (playerName === 'Sean Clasica Rahma') {
-        // Logika memastikan "Komputer" selalu menang
-        if (playerChoice === 'Batu') computerChoice = 'Gunting';
-        if (playerChoice === 'Kertas') computerChoice = 'Batu';
-        if (playerChoice === 'Gunting') computerChoice = 'Kertas';
-    } else {
-        // Logika memastikan pemain hanya kalah atau seri
-        if (playerChoice === 'Batu') computerChoice = Math.random() < 0.5 ? 'Kertas' : 'Batu';
-        if (playerChoice === 'Kertas') computerChoice = Math.random() < 0.5 ? 'Gunting' : 'Kertas';
-        if (playerChoice === 'Gunting') computerChoice = Math.random() < 0.5 ? 'Batu' : 'Gunting';
-    }
+            if (playerName === 'sean clasica rahma') {
+                // Logika memastikan "Komputer" selalu menang
+                if (playerChoice === 'Batu') computerChoice = 'Gunting';
+                if (playerChoice === 'Kertas') computerChoice = 'Batu';
+                if (playerChoice === 'Gunting') computerChoice = 'Kertas';
+            } else {
+                // Logika memastikan pemain hanya kalah atau seri
+                if (playerChoice === 'Batu') computerChoice = Math.random() < 0.5 ? 'Kertas' : 'Batu';
+                if (playerChoice === 'Kertas') computerChoice = Math.random() < 0.5 ? 'Gunting' : 'Kertas';
+                if (playerChoice === 'Gunting') computerChoice = Math.random() < 0.5 ? 'Batu' : 'Gunting';
+            }
 
-    document.getElementById('computerAnimation').textContent = computerChoice;
+            document.getElementById('computerAnimation').textContent = computerChoice;
 
-    let result = '';
-    let pesan = '';
+            let result = '';
+            let pesan = '';
 
-    if (playerChoice === computerChoice) {
-        result = `Seri! Kamu memilih ${playerChoice}, Komputer memilih ${computerChoice}.`;
-    } else if (playerName === 'Sean Clasica Rahma') {
-        pesan = `Cuman kamu yang bisa menang 🤫`; // Pesan khusus untuk "Komputer"
-        result = `Kamu memang! ${playerChoice} mengalahkan ${computerChoice}.`;
-        playerScore++;
-    } else {
-        result = `Kamu kalah! ${playerChoice} kalah dari ${computerChoice}.`;
-        computerScore++;
-    }
-    document.getElementById('result').innerHTML = `${pesan}<br>${result}`;
-    document.getElementById('score').textContent = `Skor: Pemain ${playerScore} - ${computerScore} Komputer`;
+            if (playerChoice === computerChoice) {
+                result = `Seri! Kamu memilih ${playerChoice}, Komputer memilih ${computerChoice}.`;
+            } else if (playerName === 'sean clasica rahma') {
+                // Menampilkan kartu ucapan untuk "Komputer"
+                document.getElementById('congratsCard').style.display = 'block';
+                pesan = `<strong>Cuman kamu yang bisa menang 🤫</strong>`;
+                result = `Kamu menang! ${playerChoice} mengalahkan ${computerChoice}.`;
+                playerScore++;
+            } else {
+                result = `Kamu kalah! ${playerChoice} kalah dari ${computerChoice}.`;
+                computerScore++;
+            }
 
-    setTimeout(startComputerAnimation, 2000);
-}
+            document.getElementById('result').innerHTML = `${pesan}<br>${result}`;
+            document.getElementById('score').textContent = `Skor: Pemain ${playerScore} - ${computerScore} Komputer`;
 
-    </script>
-    
-</body>
+            setTimeout(startComputerAnimation, 2500);
+        }
+    </script> 
+</body> 
 </html>
+ 
